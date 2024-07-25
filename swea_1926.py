@@ -1,4 +1,17 @@
 n = int(input())
+lst = ['3', '6', '9']
+
+for i in range(1, n+1):
+    count = 0
+    
+    for j in str(i):
+        if j in lst:
+            count += 1
+
+    if count > 0:
+        i = '-' * count
+
+    print(i, end=' ')
 
 # for i in range(1, 30):
 #     lst = []
@@ -141,17 +154,3 @@ n = int(input())
 #         if (i - i//10)
 
 
-n = int(input())
-lst = ['3', '6', '9']
-
-for i in range(1, n+1):
-    count = 0
-    
-    for j in str(i):
-        if j in lst:
-            count += 1
-
-    if count > 0:
-        i = '-' * count
-
-    print(i, end=' ')
