@@ -13,5 +13,9 @@
 # lst.insert(2, pop2)
 # print(lst)
 
-for i in range(9):
-    lst = [int(input())]
+# for i in range(9):
+#     lst = [int(input())]
+
+lst = [1, 2, 3, 4, 5]
+lst[0], lst[1] = lst[1], lst[0]
+print(lst)
