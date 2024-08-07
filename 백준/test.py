@@ -16,6 +16,22 @@
 # for i in range(9):
 #     lst = [int(input())]
 
-lst = [1, 2, 3, 4, 5]
-lst[0], lst[1] = lst[1], lst[0]
+# lst = [1, 2, 3, 4, 5]
+# lst[0], lst[1] = lst[1], lst[0]
+# print(lst)
+
+# data = [list(map(int, input().split())) for _ in range(2)]
+# print(data)
+
+# arr = [[0]*(10) for _ in range(10)]
+# print(arr)
+
+data = [[2,2,4,4]]
+lst = []
+for i in range(len(data)):
+    for x in range(data[i][0], data[i][0] + data[i][2]):
+        for y in range(data[i][1], data[i][1] + data[i][3]):
+            lst.append([x, y])
+
 print(lst)
+
