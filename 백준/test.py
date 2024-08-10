@@ -45,5 +45,15 @@
 # arr = [['1']]
 # print(arr.count('1'))
 
-arr = [list(map(int, input().split())) for _ in range(3)]
-print(arr)
+# arr = [list(map(int, input().split())) for _ in range(3)]
+# print(arr)
+
+# seq = input().split()
+# print(type(seq[1]))
+
+# lst = [1, 2, 3, 4, 5, 6, 7]
+# for i in range(0, 7, 4):
+#     print(i)
+
+light = list(input())
+print(light)
