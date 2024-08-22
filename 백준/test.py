@@ -119,45 +119,48 @@
             
 
 
-#######
-'''
-N*N 정사각 보드
-사과 -> 뱀 길이 늘어남
-벽, 자기 몸 -> 게임 끝
-'''
-def is_valid(r,c,N):
-    return 0<=r<N and 0<=c<N
+# ####### snake
+# '''
+# N*N 정사각 보드
+# 사과 -> 뱀 길이 늘어남
+# 벽, 자기 몸 -> 게임 끝
+# '''
+# def is_valid(r,c,N):
+#     return 0<=r<N and 0<=c<N
 
 
-# 뱀 이동 함수
-def snake(r,c,N,arr):
+# # 뱀 이동 함수
+# def snake(r,c,N,arr):
     
 
 
-# 우 하 좌 상 (반시계방향)
-dr = [0, 1, 0, -1]
-dc = [1, 0, -1, 0]
+# # 우 하 좌 상 (반시계방향)
+# dr = [0, 1, 0, -1]
+# dc = [1, 0, -1, 0]
 
-N = int(input())  # 보드 크기
-arr = [[0]*N for _ in range(N)]
-K = int(input())  # 사과 개수
-for _ in range(K):
-    r, c = map(int, input().split())  # 사과의 위치
-    arr[r-1][c-1] = 1  # 사과 위치에 1 표시
+# N = int(input())  # 보드 크기
+# arr = [[0]*N for _ in range(N)]
+# K = int(input())  # 사과 개수
+# for _ in range(K):
+#     r, c = map(int, input().split())  # 사과의 위치
+#     arr[r-1][c-1] = 1  # 사과 위치에 1 표시
 
-L = int(input())  # 방향 변환 횟수
+# L = int(input())  # 방향 변환 횟수
 
-d = 0  # 시작 방향(우)
-i, j = 0, 0
-for _ in range(L):
-    X, C = input().split()  # x초 후 왼(L) 또는 오(D)로 90도 회전
-    for x in range(X):
-        i += d[dr]
-        j += d[dc]
-        if is_valid(ni,nj,N):
-            pass
+# d = 0  # 시작 방향(우)
+# i, j = 0, 0
+# for _ in range(L):
+#     X, C = input().split()  # x초 후 왼(L) 또는 오(D)로 90도 회전
+#     for x in range(X):
+#         i += d[dr]
+#         j += d[dc]
+#         if is_valid(ni,nj,N):
+#             pass
     
-    if c == D:
-        d += 1
-        ni = i + d[dr]
-        nj = j + d[dc]
+#     if c == D:
+#         d += 1
+#         ni = i + d[dr]
+#         nj = j + d[dc]
+
+a = 'dz==dz='
+print(a.count('dz='))

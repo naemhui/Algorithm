@@ -7,8 +7,6 @@ for i in range(1, len(word)):
             cnt -= 1
         elif word[i-1] == 's':
             cnt -= 1
-        elif word[i-1] == 'z' and 'dz=' not in word:
-            cnt -= 1
     
     if word[i] == 'j':
         if word[i-1] == 'l':
@@ -22,7 +20,10 @@ for i in range(1, len(word)):
         elif word[i-1] == 'c':
             cnt -= 1
 
-if 'dz=' in word:
-    cnt -= 2
+if 'z=' in word:
+    cnt -= word.count('z=')
+    
+    if 'dz=' in word:
+        cnt -= word.count('dz=')
 
 print(cnt)
