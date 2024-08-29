@@ -162,5 +162,13 @@
 #         ni = i + d[dr]
 #         nj = j + d[dc]
 
-a = 'dz==dz='
-print(a.count('dz='))
+# a = 'dz==dz='
+# print(a.count('dz='))
+
+# arr = [[0]*2 for _ in range(3)]
+# print(arr)
+
+command = list(map(int, input().split()))
+for i in range(len(command)):
+    command[i] -= 1
+print(command)
