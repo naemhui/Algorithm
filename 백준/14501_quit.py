@@ -1,42 +1,26 @@
-# 지정한 시작일로부터 돈 계산해주는 함수
-def wage(N, start_day):
-    global day
-    global money
-    global start
-
-    if N >= day + T_lst[start_day]:
-        day += T_lst[start_day]
-        for i in range(start_day, T_lst[start_day]):
-            money += P_lst[i]
-
-    else:
-        day = N
-        for i in range(start_day, N):
-            money += P_lst[i]
-
-    # 아직 근무일 남아있으면 재귀 호출할게
-    if N > day:
-        wage(N, day)
+def max_profit(N, T, P):
+    # DP 배열 초기화: dp[i]는 i일부터 시작했을 때 얻을 수 있는 최대 수익
+    dp = [0] * (N + 1)
     
-    return money
+    # 마지막 날부터 첫째 날까지 역순으로 계산
+    for i in range(N-1, -1, -1):
+        if i + T[i] > N:
+            # 상담이 퇴사일을 넘어가는 경우
+            dp[i] = dp[i+1]
+        else:
+            # 현재 상담을 하는 경우와 하지 않는 경우 중 최대값 선택
+            dp[i] = max(P[i] + dp[i + T[i]], dp[i + 1])
+    
+    return dp[0]
 
-
-N = int(input())  # 퇴사까지 남은 일수
-T_lst = []
-P_lst = []
+# 입력 읽기
+N = int(input())
+T = []
+P = []
 
 for _ in range(N):
-    T, P = map(int, input().split())
-    T_lst.append(T)
-    P_lst.append(P)
+    ti, pi = map(int, input().split())
+    T.append(ti)
+    P.append(pi)
 
-max_money = 0
-
-for start in range(7):  # 각 날짜마다 시작해봄
-    day = 0  # 며칠 일하는지
-    money = 0  # 얼마 벌었는지
-    result = wage(N, start)
-
-    if result > max_money:
-        max_money = result
-print(max_money)
+print(max_profit(N, T, P))
