@@ -168,7 +168,24 @@
 # arr = [[0]*2 for _ in range(3)]
 # print(arr)
 
-command = list(map(int, input().split()))
-for i in range(len(command)):
-    command[i] -= 1
-print(command)
+# command = list(map(int, input().split()))
+# for i in range(len(command)):
+#     command[i] -= 1
+# print(command)
+arr = ['A', 'B', 'C', 'D', 'E'] # 이중 3개 중복 없이 뽑기
+path = []
+n = 3
+
+
+def run(lev, start):
+    if lev == n:
+        print(path[0])
+        # print(path)
+        return
+
+    for i in range(start, 5):
+        path.append(arr[i])
+        run(lev + 1, i + 1)  # i 업데이트 -> 중복X
+        path.pop()
+
+run(0, 0)
