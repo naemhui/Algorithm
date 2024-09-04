@@ -1,38 +1,38 @@
-'''
-N명 -> N/2
-'''
-
 N = int(input())
-arr = [list(map(int, input().split()) for _ in range(N))]
-# lst = []
-n = 2  # 원소 2개인 조합
+arr = [list(map(int, input().split())) for _ in range(N)]
 
-lst2 = []
-def ability_differ(lst1):
-    for i in range(N):
-        if i not in lst1:
-            lst2.append(i)
-
-    # print(lst1)
-    start_ability = arr[lst1[0]][lst1[1]] + arr[lst1[1]][lst1[0]]
-    link_ability = arr[lst2[0]][lst2[1]] + arr[lst2[1]][lst2[0]]
-
-    return abs(start_ability-link_ability)
+min_diff = float('inf')  # 두 팀간 능력치 차이의 최솟값
+team = []  # 선택된 선수 인덱스
 
 
-differ_lst = []
+# 팀 능력치 계산
+def calculate_ability(team):
+    ability = 0
+    for i in range(len(team)):
+        for j in range(i + 1, len(team)):
+            ability += arr[team[i]][team[j]] + arr[team[j]][team[i]]
+    return ability
 
-def run(lev, start, lst):
-    if lev == n:
-        lst = list(lst)
-        differ = ability_differ(lst)
-        differ_lst.append(differ)
+
+# lev가 N // 2에 도달하면
+# team을 스타트 팀으로, 나머지 사람들을 링크 팀으로 나누어 각각의 능력치를 계산
+def run(lev, start):
+    global min_diff
+    if lev == N // 2:
+        start_team = team
+        link_team = [i for i in range(N) if i not in start_team]
+        
+        start_ability = calculate_ability(start_team)
+        link_ability = calculate_ability(link_team)
+        
+        diff = abs(start_ability - link_ability)
+        min_diff = min(min_diff, diff)
         return
 
     for i in range(start, N):
-        lst.append(arr[i])
-        run(lev + 1, i + 1, lst)
-        lst.pop()
+        team.append(i)
+        run(lev + 1, i + 1)
+        team.pop()
 
-run(0, 0, [])
-print(differ_lst)
+run(0, 0)
+print(min_diff)
