@@ -172,20 +172,42 @@
 # for i in range(len(command)):
 #     command[i] -= 1
 # print(command)
-arr = ['A', 'B', 'C', 'D', 'E'] # 이중 3개 중복 없이 뽑기
-path = []
-n = 3
+# arr = ['A', 'B', 'C', 'D', 'E'] # 이중 3개 중복 없이 뽑기
+# path = []
+# n = 3
 
 
-def run(lev, start):
-    if lev == n:
-        print(path[0])
-        # print(path)
-        return
+# def run(lev, start):
+#     if lev == n:
+#         print(path[0])
+#         # print(path)
+#         return
 
-    for i in range(start, 5):
-        path.append(arr[i])
-        run(lev + 1, i + 1)  # i 업데이트 -> 중복X
-        path.pop()
+#     for i in range(start, 5):
+#         path.append(arr[i])
+#         run(lev + 1, i + 1)  # i 업데이트 -> 중복X
+#         path.pop()
 
-run(0, 0)
+# run(0, 0)
+
+# def navi(i, j, hole_i, hole_j):
+#     # 2사분면
+#     if i < hole_i and j < hole_j:
+
+
+#     # 1사분면
+#     elif i < hole_i and j > hole_j:
+
+    
+#     # 3사분면
+#     elif i > hole_i and j < hole_j:
+
+    
+#     # 4사분면
+#     else:
+lst = ['R', 'B']
+for c in lst:
+    if 'c' != color:
+        a = c
+
+a = c if 'c' != color in lst
