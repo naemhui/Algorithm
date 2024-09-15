@@ -205,3 +205,5 @@
     
 #     # 4사분면
 #     else:
+for _ in range(0):
+    print('1')
