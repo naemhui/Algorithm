@@ -1,27 +1,16 @@
-'''
-7
-3 10
-5 20
-1 10
-1 20
-2 15
-4 40
-2 200
-'''
+N = int(input())  # 남은 일 수
+consult = [list(map(int, input().split())) for _ in range(N)]  # 상담 목록
+dp = [0] * (N + 1)  # dp 배열 초기화 (N+1 크기)
 
-def counsel(arr):
-    dp = [[0]*(N+1)]
-    for s in range(1, N+1):
-        for i in range(s):
-            dp[s][i] = max(dp[s][i], dp[s-1][i] + arr[s][i])
-            dp[s][i+1] = max(dp[s][i+1], dp[s-1][i] + arr[s][i+1])
-    return max(dp[-1])
+# i일을 기준으로 반복
+for i in range(N):
+    Ti, Pi = consult[i]  # 상담 기간과 수익
+    # 현재까지의 최대 수익을 다음 날로 넘김
+    if i + 1 <= N:
+        dp[i + 1] = max(dp[i + 1], dp[i])
+    # 상담이 끝나는 날이 N일 이하일 때
+    if i + Ti <= N:
+        dp[i + Ti] = max(dp[i + Ti], dp[i] + Pi)
 
-N = int(input())
-arr = [[0]*(N+1) for _ in range(2)]
-for _ in range(N):
-    T, P = map(int, input().split())
-    arr[0][_+1] = T
-    arr[1][_+1] = P
-
-counsel(arr)
+# 마지막 날까지 얻을 수 있는 최대 수익 출력
+print(dp[N])
