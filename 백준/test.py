@@ -205,9 +205,4 @@
     
 #     # 4사분면
 #     else:
-lst = ['R', 'B']
-for c in lst:
-    if 'c' != color:
-        a = c
-
-a = c if 'c' != color in lst
+print([[0]*5 for _ in range(5)])
