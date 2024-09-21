@@ -209,27 +209,74 @@
 # arr = [3, 5, 7, 2, 1, 0]
 # arr = qsort(arr)
 
-def qsort(arr):
-    if len(arr) < 2:
-        return arr
-    pivot = arr[0][0]  # 첫 번째 요소의 나이 (정렬 기준)
-    low = []
-    high = []
-    for i in range(1, len(arr)):
-        value = arr[i][0]  # 배열의 나이를 기준으로 비교
-        if value < pivot:
-            low.append(arr[i])
-        else:
-            high.append(arr[i])
+# def qsort(arr):
+#     if len(arr) < 2:
+#         return arr
+#     pivot = arr[0][0]  # 첫 번째 요소의 나이 (정렬 기준)
+#     low = []
+#     high = []
+#     for i in range(1, len(arr)):
+#         value = arr[i][0]  # 배열의 나이를 기준으로 비교
+#         if value < pivot:
+#             low.append(arr[i])
+#         else:
+#             high.append(arr[i])
 
-    return qsort(low) + [arr[0]] + qsort(high)  # arr[0]을 기준점으로 추가
+#     return qsort(low) + [arr[0]] + qsort(high)  # arr[0]을 기준점으로 추가
 
 
-N = int(input())
-arr = []
-for _ in range(N):
-    age, name = input().split()
-    age = int(age)
-    arr.append([age, name])
+# N = int(input())
+# arr = []
+# for _ in range(N):
+#     age, name = input().split()
+#     age = int(age)
+#     arr.append([age, name])
 
-print(qsort(arr))
+# print(qsort(arr))
+
+# 순열
+
+arr = [1, 1, 2, 3, 4]
+visited = [False] * len(arr)
+result = [0] * len(arr)
+
+def dfs(level):
+    if level == len(arr):
+        print(*result)
+        return
+
+    for i in range(len(arr)):
+        # 가지치기 : 중복된 숫자 제거
+        if visited[i]:
+            continue
+
+        visited[i] = True
+        result[level] = arr[i]
+        dfs(level + 1)
+        visited[i] = False
+
+# dfs(0)
+
+arr = [1, 1, 2, 3, 4]
+arr.sort()  # 배열을 정렬하여 중복된 숫자를 연속적으로 배치
+visited = [False] * len(arr)
+result = [0] * len(arr)
+
+def dfs(level):
+    if level == len(arr):
+        print(*result)
+        return
+
+    last_used = None  # 같은 레벨에서 마지막으로 사용된 숫자를 기록
+    for i in range(len(arr)):
+        # 가지치기: 이미 방문한 숫자 또는 같은 레벨에서 이미 사용된 숫자 건너뛰기
+        if visited[i] or arr[i] == last_used:
+            continue
+
+        visited[i] = True
+        result[level] = arr[i]
+        last_used = arr[i]  # 이번 레벨에서 사용된 숫자를 기록
+        dfs(level + 1)
+        visited[i] = False
+
+dfs(0)
