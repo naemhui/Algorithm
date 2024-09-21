@@ -205,5 +205,31 @@
     
 #     # 4사분면
 #     else:
-for _ in range(0):
-    print('1')
+
+# arr = [3, 5, 7, 2, 1, 0]
+# arr = qsort(arr)
+
+def qsort(arr):
+    if len(arr) < 2:
+        return arr
+    pivot = arr[0][0]  # 첫 번째 요소의 나이 (정렬 기준)
+    low = []
+    high = []
+    for i in range(1, len(arr)):
+        value = arr[i][0]  # 배열의 나이를 기준으로 비교
+        if value < pivot:
+            low.append(arr[i])
+        else:
+            high.append(arr[i])
+
+    return qsort(low) + [arr[0]] + qsort(high)  # arr[0]을 기준점으로 추가
+
+
+N = int(input())
+arr = []
+for _ in range(N):
+    age, name = input().split()
+    age = int(age)
+    arr.append([age, name])
+
+print(qsort(arr))
