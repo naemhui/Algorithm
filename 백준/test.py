@@ -283,9 +283,15 @@
 
 # print(-7%4)
 # print(7%4)\
-N = 5
-arr = [[0]*(N+1) for _ in range(N+1)]
-for i in range(1, N+1):
-    arr[i][1:N+1] = map(int, input().split())
+# N = 5
+# arr = [[0]*(N+1) for _ in range(N+1)]
+# for i in range(1, N+1):
+#     arr[i][1:N+1] = map(int, input().split())
 
-print(arr)
+# print(arr)
+N = 3
+idxs = [list(range(N)), list(range(N-1,-1,-1))]
+print(idxs)
+# [0, N-2, N-1, N-1, N-2, 0]
+# [0, N-2, N-1, N, N+1, N+2]
+
