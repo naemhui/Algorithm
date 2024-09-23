@@ -1,33 +1,33 @@
+def find_parent(parent, x):
+    result = [x]
+    while parent[x]:
+        result.append(parent[x])
+        x = parent[x]
+    return result
+
+
 T = int(input())
-for tc in range(T):
+for _ in range(T):
     N = int(input())
+    parent = [0 for _ in range(N+1)]
     for _ in range(N-1):
-        parent, child = map(int, input().split())
-    node1, node2 = map(int, input().split())
+        a, b = map(int, input().split())
+        parent[b] = a
 
-    print()
+    x, y = map(int, input().split())
+    # 각 부모 리스트 정의
+    x_parent = find_parent(parent, x)
+    y_parent = find_parent(parent, y)
 
-arr = [1, 2, 1, 3, 2, 4, 3, 5, 3, 6, 4, 7, 5, 8, 5, 9, 6, 10, 6, 11, 7, 12, 11, 13]
+    # 깊이 맞춰주기
+    i, j = 0, 0
+    if len(x_parent) > len(y_parent):
+        i = len(x_parent) - len(y_parent)
+    else:
+        j = len(y_parent) - len(x_parent)
 
-# 이진 트리 생성
-nodes = [[] for _ in range(14)]
-for i in range(0, len(arr), 2):
-    parentNode = arr[i]
-    childNode = arr[i + 1]
-    nodes[parentNode].append(childNode)
-
-# 자식이 없다는 걸 표현하기 위해 None 을 삽입
-for li in nodes:
-    for _ in range(len(li), 2):
-        li.append(None)
-
-
-# 전위 순회
-def preorder(nodeNum):
-    if nodeNum == None:
-        return
-    print(nodeNum, end = ' ')
-    preorder(nodes[nodeNum][0])
-    preorder(nodes[nodeNum][1])
-
-preorder(1)
+    # 같은 깊이에서 최소 공통 조상 찾기
+    while x_parent[i] != y_parent[j]:
+        i += 1
+        j += 1
+    print(x_parent[i])
