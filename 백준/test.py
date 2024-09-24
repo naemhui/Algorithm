@@ -291,7 +291,75 @@
 # print(arr)
 N = 3
 idxs = [list(range(N)), list(range(N-1,-1,-1))]
-print(idxs)
+# print(idxs)
 # [0, N-2, N-1, N-1, N-2, 0]
 # [0, N-2, N-1, N, N+1, N+2]
+# N = 4
+# arr = [[0]*8]+[list(map(int,input())) for _ in range(N)]
+# print(arr)
+# cogwheel = [1, 2, 3, 4]
+# print(cogwheel.index(2))
+# print(cogwheel.pop(2))
+# print(cogwheel)
 
+# clockwise = [-1, 0]*10
+# print(clockwise)
+# arr = [1, 2, 3, 4, 5, 6]
+# # arr = [arr[-1]] + arr[:-1]
+# # print(arr)
+# arr = [1, 2, 3, 4, 5, 6]
+# # arr= arr[1:] + [arr[0]]
+# # print(arr)
+# for i in range(5, 5):
+#     print(i)
+
+# 톱니바퀴 배열 입력 받기
+arr = [list(map(int, input().strip())) for _ in range(4)]
+K = int(input())  # 회전 횟수 입력
+commands = [list(map(int, input().split())) for _ in range(K)]  # 회전 명령 입력
+
+# 톱니바퀴 회전 함수
+def rotate(cog, direction):
+    if direction == 1:  # 시계 방향
+        arr[cog] = [arr[cog][-1]] + arr[cog][:-1]
+    else:  # 반시계 방향
+        arr[cog] = arr[cog][1:] + [arr[cog][0]]
+
+# 회전 명령 처리
+for N, D in commands:
+    N -= 1  # 인덱스 맞춤 (1번 톱니바퀴는 arr[0]에 해당)
+    rotations = [0] * 4  # 각 톱니바퀴의 회전 방향 저장
+    rotations[N] = D  # 회전하려는 톱니바퀴의 회전 방향 설정
+    
+    # 왼쪽 톱니바퀴 회전 여부 확인
+    for i in range(N-1, -1, -1):
+        if arr[i][2] != arr[i+1][6]:  # 극이 다르면
+            rotations[i] = -rotations[i+1]
+        else:
+            break
+
+    # 오른쪽 톱니바퀴 회전 여부 확인
+    for i in range(N+1, 4):
+        if arr[i-1][2] != arr[i][6]:  # 극이 다르면
+            rotations[i] = -rotations[i-1]
+        else:
+            break
+
+    # 각 톱니바퀴 회전
+    for i in range(4):
+        if rotations[i] != 0:
+            rotate(i, rotations[i])
+
+# 점수 계산
+score = 0
+if arr[0][0] == 1:
+    score += 1
+if arr[1][0] == 1:
+    score += 2
+if arr[2][0] == 1:
+    score += 4
+if arr[3][0] == 1:
+    score += 8
+
+# 결과 출력
+print(score)
