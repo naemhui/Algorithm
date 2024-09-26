@@ -364,7 +364,14 @@ idxs = [list(range(N)), list(range(N-1,-1,-1))]
 # # 결과 출력
 # print(score)
 
-arr = [0, 1, 2, 3, 4, 5, 6, 7, 8]
+# arr = [0, 1, 2, 3, 4, 5, 6, 7, 8]
 # print(arr[:-1])
 # print(arr[::-1])
-print(arr[1:6])
+# print(arr[1:6])
+N = 3
+arr = [[None]*(N+1) for _ in range(N+1)]
+arr[0][0] = False
+# arr[1][2] = 2
+# arr[1][2] += 3
+# arr[1][3].append(2)
+print(arr)
