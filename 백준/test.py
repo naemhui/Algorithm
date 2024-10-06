@@ -375,3 +375,6 @@ arr[0][0] = False
 # arr[1][2] += 3
 # arr[1][3].append(2)
 print(arr)
+
+i ++
+print(i)
