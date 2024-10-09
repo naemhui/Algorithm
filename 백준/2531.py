@@ -8,26 +8,25 @@
 가능한 다양한 초밥 먹는 게 목적
 '''
 N, D, K, C = map(int, input().split())
-susi = []
+sushi = []
 for _ in range(N):
-    susi.append(int(input()))
+    sushi.append(int(input()))
 
-candidate = []
+sushi += sushi[:K-1]
+# print(susi)
+
 # K개 = N-1 - () +1
 # () = N-K
-for i in range(N-K+1):
-    candidate.append(susi[i:i+4])
-# candidate = [[7, 9, 7, 30], [9, 7, 30, 2], [7, 30, 2, 7], [30, 2, 7, 9], [2, 7, 9, 25]]
 
-# 몇 종류 가능한지
-numbers = []
+sum_v = max_sum = 0
 
-max_eat = 0
-for lst in candidate:
-    if C not in lst:
-        eat = len(set(lst)) + 1
-        max_eat = max(max_eat, eat)
+for i in range(N):
+    candidate = sushi[i:i+K]
+    # print(i, candidate)
+    if C not in candidate:
+        sum_v = len(set(candidate)) + 1
+        max_sum = max(max_sum, sum_v)
     else:
-        eat = len(set(lst))
-        max_eat = max(max_eat, eat)
-print(max_eat)
+        sum_v = len(set(candidate))
+        max_sum = max(max_sum, sum_v)
+print(max_sum)
