@@ -4,6 +4,8 @@
 '''
 from collections import deque
 N, K = map(int, input().split())
+
+# 수빈 0 ~ 100000
 max_v = 100000
 visited = [0]*(max_v+1)
 
