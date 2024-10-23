@@ -13,7 +13,6 @@ arr = list(map(int, input().split()))
 arr.sort()
 
 cnt = 0
-visited = [0] * N
 
 for i in range(N):
     # 확인할 숫자 : target
@@ -28,11 +27,14 @@ for i in range(N):
             if left != i and right != i:
                 cnt += 1
                 break
-
-            # target이 left 또는 right와 같으면
-            else:
+            elif left == i:
                 left += 1
+            elif right == i:
                 right -= 1
+            # # target이 left 또는 right와 같으면
+            # else:
+            #     left += 1
+            #     right -= 1
 
         elif now_sum < target:
             left += 1
