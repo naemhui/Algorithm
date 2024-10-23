@@ -1,26 +1,25 @@
 '''
-주어진 배열에서 최장 증가 부분 수열(LIS)의 길이를 찾고
-이를 통해 필요한 이동 수를 계산하는 방법으로 풀자
-
--> 원래 배열에서 이미 정렬된 상태에 있는 부분을 찾아 그 길이를 LIS로 사용
--> 총 아이들의 수 - LIS 길이 = 이동해야 할 최소 수
+LIS(가장 긴 증가하는 부분수열)을 구하면 해당되는 숫자는 순서에 맞게 자리한 수이기 때문에
+이외의 숫자들만 자리에 맞게 옮기면 최소 횟수가 됨
+-> LIS 를 구하고, 전체 길이에서 빼주기
 '''
 
-def min_sort(arr, N):
-    sorted_arr = sorted(arr)
-    lis_length = 0
-    dp = [1] * N
-
-    # LIS 길이 계산
-    for i in range(N):
-        for j in range(i):
-            if arr[i] == sorted_arr[j]:  # 정렬된 배열과 일치하면
-                dp[i] = max(dp[i], dp[j] + 1)
-
-    lis_length = max(dp)
-
-    return N - lis_length
-
 N = int(input())
-arr = list(int(input()) for _ in range(N))
-print(min_sort(arr, N))
+
+d = [1] * (N+1)  # LIS 저장하는 배열 (d[i] = i번째 수를 끝으로 하는 LIS 길이)
+num = [0]  # 수열 저장하는 배열
+
+for i in range(N):
+    num.append(int(input()))
+
+# 가장 긴 증가하는 수열 찾기 
+# num[j] < num[i]라면, num[i]를 num[j] 뒤에 놓을 수 있으므로
+# d[i]는 d[j] + 1과 현재의 d[i] 중 큰 값을 선택
+for i in range(1, N+1):
+    for j in range(1, i):
+        if num[j] < num[i]:
+            d[i] = max(d[i], d[j]+1)
+# 여기까지 했을 때 d 배열에는 각 인덱스에서 끝나는 최장 증가 부분 수열의 길이가 저장됨
+
+# (최소 이동 횟수 = 전체 수 - 최장 증가 부분수열의 길이)
+print(N - max(d))
