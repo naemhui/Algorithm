@@ -1,46 +1,56 @@
-# 1. 감시 체크
-def check() :
-    for x, y in teacher :
-        for dx, dy in [(-1, 0), (0, 1), (1, 0), (0, -1)] :
-            for d in range(1, N) :
-                nx= x + dx*d
-                ny = y+ dy*d
-
-                # 맵을 벗어나거나 장애물을 마주칠 경우 break
-                if (nx < 0 or nx >= N or ny < 0 or ny >= N) or graph[nx][ny] == "O":
-                    break
-                # 학생이 있을 경우 False
-                if graph[nx][ny] == "S":
-                    return False
-    return True
-
-# 2. 백트래킹
-def backtracking(cnt, idx) :
-    if idx == len(empty) : return
-    # 장애물이 모두 설치된 경우
-    if cnt == 3 :
-        # 감시를 모두 피할 경우 YES 출력 후 종료
-        if check() :
-            print("YES")
-            exit()
-        return
-
-    for i in range(idx, len(empty)):
-        x, y = empty[i]
-        # 장애물 설치
-        graph[x][y] = "O"
-        backtracking(cnt + 1, i+1)
-        # 장애물 회수
-        graph[x][y] = "X"
-
 N = int(input())
 graph = [list(input().split()) for _ in range(N)]
+teacher = []
+flag = False
 
-teacher, empty = [], []
-for i in range(N) :
-    for j in range(N) :
-        if graph[i][j] == "T" : teacher.append((i, j))
-        elif graph[i][j] == "X" : empty.append((i, j))
+for i in range(N):
+    for j in range(N):
+        if graph[i][j] == "T":
+            teacher.append([i, j])
 
-backtracking(0, 0)
-print("NO")
+dr = [-1, 1, 0, 0]
+dc = [0, 0, -1, 1]
+
+def is_valid(r, c):
+    return 0 <= r < N and 0 <= c < N
+
+def bfs():
+    for t in teacher:
+        for d in range(4):
+            nr, nc = t
+            while is_valid(nr, nc):
+                if graph[nr][nc] == "O":
+                    break
+                # 학생 보이면 실패
+                if graph[nr][nc] == "S":
+                    return False
+                nr += dr[d]
+                nc += dc[d]
+    # 모두 통과하면 학새이 안 보인다는 것 => 성공
+    return True
+
+def backTracking(cnt):
+    global flag
+
+    if cnt == 3:
+        # 선생님 위치에서 감시
+        if bfs():
+            flag = True 
+        return
+    
+    for r in range(N):
+        for c in range(N):
+            if graph[r][c] == "X":
+                graph[r][c] = "O"      # 장애물 설치
+                backTracking(cnt + 1)  # 다음 장애물 설치
+                graph[r][c] = "X"      # 원래 상태로 되돌리기
+                
+                if flag:  # 성공하면 빠져나오기
+                    return
+
+backTracking(0)
+
+if flag:
+    print("YES")
+else:
+    print("NO")
