@@ -377,10 +377,13 @@ idxs = [list(range(N)), list(range(N-1,-1,-1))]
 # print(arr)
 # from collecti
 
-for i in range(10):
-    if i % 2 == 0:
-        # continue
-        pass
-    elif i % 3 == 0:
-        print(i)
+# for i in range(10):
+#     if i % 2 == 0:
+#         # continue
+#         pass
+#     elif i % 3 == 0:
+#         print(i)
     # print(i)
+
+board = [list(input()) for _ in range(12)]
+print(board)
