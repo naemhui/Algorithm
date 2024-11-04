@@ -10,3 +10,4 @@ for _ in range(K):
     
     print(f'Data Set {_+1}:')
     print(ans)
+    print()
