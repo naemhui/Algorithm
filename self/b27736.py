@@ -1,12 +1,11 @@
 N = int(input())
-
-lst = list(map(int, input().split()))
-
-if lst.count(0) >= N//2:
-    print('INVALID')
-
-elif lst.count(1) > lst.count(-1):
-    print('APPROVED')
-
-elif lst.count(-1) >= lst.count(1):
-    print('REJECTED')
+arr = list(map(int,input().split()))
+t = arr.count(1)
+f = arr.count(-1)
+m = arr.count(0)
+if m * 2 >= N:
+    print("INVALID")
+elif t > f:
+    print("APPROVED")
+else:
+    print("REJECTED")
